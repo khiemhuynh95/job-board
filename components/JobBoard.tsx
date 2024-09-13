@@ -111,7 +111,7 @@ const jobs = [
 ]
 
 export default function JobBoard() {
-  const { user, updateUser } = useUserContext();
+  const { user, setUser } = useUserContext();
 
   const [appliedJobs, setAppliedJobs] = useState<number[]>([])
   //const [userEmail, setUserEmail] = useState<string | null>(null)
@@ -136,7 +136,7 @@ export default function JobBoard() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    updateUser({ fullname: 'Khiem Huynh', email: tempEmail });
+    setUser({ name: 'Khiem Huynh', email: tempEmail });
     //setUserEmail(tempEmail)
     setIsLoginModalOpen(false)
     if (selectedJob) {
@@ -146,7 +146,7 @@ export default function JobBoard() {
   }
 
   const handleLogout = () => {
-    updateUser(null)
+    setUser(null)
     setAppliedJobs([])
   }
 

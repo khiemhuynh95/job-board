@@ -1,30 +1,33 @@
 'use client'
 
-import React, { createContext, useState, useContext  } from 'react';
+import React, { createContext, useState, useContext } from 'react'
 
 interface User {
-  fullname: string;
-  email: string;
+  name: string
+  email: string
 }
 
-const UserContext = createContext<User | null>();
+interface UserContextType {
+  user: User | null
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
+}
 
-const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+const UserContext = createContext<UserContextType | undefined>(undefined)
 
-  const updateUser = (newUser: User | null) => {
-    setUser(newUser);
-  };
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null)
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
-  );
-};
+  )
+}
 
-export { UserContext, UserProvider };
-
-export const useUserContext = () => {
-  return useContext(UserContext);
-};
+export function useUserContext() {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider')
+  }
+  return context
+}

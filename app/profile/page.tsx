@@ -44,11 +44,11 @@ export default function Profile() {
         <CardContent className="space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={user.email} disabled />
+            <Input id="email" type="email" value={user?.email} disabled />
           </div>
           <div>
             <Label htmlFor="name">Full Name</Label>
-            <Input id="name" type="text" placeholder="John Doe" value={user.fullname} />
+            <Input id="name" type="text" placeholder="John Doe" value={user?.name} />
           </div>
           <div>
             <Label htmlFor="resume">Resume</Label>
