@@ -10,7 +10,6 @@ import { Label } from "@/components/ui/label"
 import { BriefcaseIcon, CheckCircleIcon, LogOutIcon, MapPinIcon, BuildingIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useUserContext } from '../context/UserContext';
-import { useRouter } from 'next/navigation'
 
 // Mock data for jobs (unchanged)
 const jobs = [
@@ -120,7 +119,6 @@ export default function JobBoard() {
   const [isJobModalOpen, setIsJobModalOpen] = useState(false)
   const [tempEmail, setTempEmail] = useState('')
   const [selectedJob, setSelectedJob] = useState<typeof jobs[0] | null>(null)
-  const router = useRouter();
 
   const handleOpenJobModal = (job: typeof jobs[0]) => {
     setSelectedJob(job)
