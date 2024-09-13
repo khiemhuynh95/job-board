@@ -10,6 +10,11 @@ import { Label } from "@/components/ui/label"
 import { BriefcaseIcon, CheckCircleIcon, LogOutIcon, MapPinIcon, BuildingIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 
+
+import React, { useContext } from 'react';
+import { useUserContext } from '../context/UserContext';
+import { useRouter } from 'next/navigation'
+
 // Mock data for jobs (unchanged)
 const jobs = [
   { 
@@ -109,13 +114,16 @@ const jobs = [
   },
 ]
 
-export function JobBoardComponent() {
+export default function JobBoard() {
+  const { user, updateUser } = useUserContext();
+
   const [appliedJobs, setAppliedJobs] = useState<number[]>([])
-  const [userEmail, setUserEmail] = useState<string | null>(null)
+  //const [userEmail, setUserEmail] = useState<string | null>(null)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isJobModalOpen, setIsJobModalOpen] = useState(false)
   const [tempEmail, setTempEmail] = useState('')
   const [selectedJob, setSelectedJob] = useState<typeof jobs[0] | null>(null)
+  const router = useRouter();
 
   const handleOpenJobModal = (job: typeof jobs[0]) => {
     setSelectedJob(job)
@@ -123,7 +131,7 @@ export function JobBoardComponent() {
   }
 
   const handleApply = () => {
-    if (userEmail && selectedJob) {
+    if (user && selectedJob) {
       setAppliedJobs([...appliedJobs, selectedJob.id])
       setIsJobModalOpen(false)
     } else {
@@ -133,7 +141,8 @@ export function JobBoardComponent() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    setUserEmail(tempEmail)
+    updateUser({ fullname: 'Khiem Huynh', email: tempEmail });
+    //setUserEmail(tempEmail)
     setIsLoginModalOpen(false)
     if (selectedJob) {
       setAppliedJobs([...appliedJobs, selectedJob.id])
@@ -142,23 +151,27 @@ export function JobBoardComponent() {
   }
 
   const handleLogout = () => {
-    setUserEmail(null)
+    updateUser(null)
     setAppliedJobs([])
   }
+
+  const handleProfileClick = () => {
+    router.push('/profile'); // Navigate to profile page
+  };
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Job Board</h1>
-        {userEmail ? (
+        {user ? (
           <div className="flex items-center space-x-4">
-            <Link href="/profile" passHref>
-              <Button variant="outline">
+         
+              <Button onClick={handleProfileClick} variant="outline">
                 <UserIcon className="mr-2 h-4 w-4" />
                 Profile
               </Button>
-            </Link>
-            <span>{userEmail}</span>
+            
+            <span>{user.email}</span>
             <Button variant="outline" onClick={handleLogout}>
               <LogOutIcon className="mr-2 h-4 w-4" />
               Logout

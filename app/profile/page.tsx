@@ -7,8 +7,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { UserIcon, UploadIcon, CheckCircleIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useUserContext } from '../../context/UserContext';
+import React, { useContext } from 'react';
 
 export default function Profile() {
+  const { user, updateUser } = useUserContext();
+  
   const [resumeFile, setResumeFile] = useState<File | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
