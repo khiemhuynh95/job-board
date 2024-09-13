@@ -1,12 +1,10 @@
 import React from 'react';
-import { UserProvider } from '../context/UserContext';
-import JobBoard from '../components/MainContent';
+
+import JobBoard from '../components/JobBoard';
 
 function App() {
   return (
-    <UserProvider>
       <JobBoard />
-    </UserProvider>
   );
 }
 

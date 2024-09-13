@@ -11,7 +11,7 @@ import { useUserContext } from '../../context/UserContext';
 import React, { useContext } from 'react';
 
 export default function Profile() {
-  const { user, updateUser } = useUserContext();
+  const { user } = useUserContext();
   
   const [resumeFile, setResumeFile] = useState<File | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -45,11 +45,11 @@ export default function Profile() {
         <CardContent className="space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="your@email.com" disabled />
+            <Input id="email" type="email" value={user.email} disabled />
           </div>
           <div>
             <Label htmlFor="name">Full Name</Label>
-            <Input id="name" type="text" placeholder="John Doe" />
+            <Input id="name" type="text" placeholder="John Doe" value={user.fullname} />
           </div>
           <div>
             <Label htmlFor="resume">Resume</Label>

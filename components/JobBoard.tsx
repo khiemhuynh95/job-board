@@ -165,12 +165,14 @@ export default function JobBoard() {
         <h1 className="text-3xl font-bold">Job Board</h1>
         {user ? (
           <div className="flex items-center space-x-4">
-         
-              <Button onClick={handleProfileClick} variant="outline">
+             <Link href={{
+                pathname: "/profile"
+              }}>
+              <Button variant="outline">
                 <UserIcon className="mr-2 h-4 w-4" />
                 Profile
               </Button>
-            
+              </Link>
             <span>{user.email}</span>
             <Button variant="outline" onClick={handleLogout}>
               <LogOutIcon className="mr-2 h-4 w-4" />
