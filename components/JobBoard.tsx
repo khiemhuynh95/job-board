@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -9,9 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BriefcaseIcon, CheckCircleIcon, LogOutIcon, MapPinIcon, BuildingIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
-
-
-import React, { useContext } from 'react';
 import { useUserContext } from '../context/UserContext';
 import { useRouter } from 'next/navigation'
 
@@ -154,10 +151,6 @@ export default function JobBoard() {
     updateUser(null)
     setAppliedJobs([])
   }
-
-  const handleProfileClick = () => {
-    router.push('/profile'); // Navigate to profile page
-  };
 
   return (
     <div className="container mx-auto p-4">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label"
 import { UserIcon, UploadIcon, CheckCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useUserContext } from '../../context/UserContext';
-import React, { useContext } from 'react';
 
 export default function Profile() {
   const { user } = useUserContext();
